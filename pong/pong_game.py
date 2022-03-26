@@ -120,13 +120,13 @@ class Game:
     def player_movement(self, left=True, up=True):
 
         if left:
-            if up and self.player1.y - Player.VEL < 0:
+            if up and self.player1.y - Player.VELOCITY < 0:
                 return False
             if not up and self.player1.y + Player.HEIGHT > self.winHeight:
                 return False
             self.player1.move(up)
         else:
-            if up and self.player2.y - Player.VEL < 0:
+            if up and self.player2.y - Player.VELOCITY < 0:
                 return False
             if not up and self.player2.y + Player.HEIGHT > self.winHeight:
                 return False
@@ -148,10 +148,14 @@ class Game:
             self.ball.initialize()
             self.p2_score += 1
             self.rally = 0
+            for player in [self.player1, self.player2]:
+                player.initialize()
         elif self.ball.x > self.winWidth:
             self.ball.initialize()
             self.p1_score += 1
             self.rally = 0 
+            for player in [self.player1, self.player2]:
+                player.initialize()
 
 
         game_info = Game_Info(
